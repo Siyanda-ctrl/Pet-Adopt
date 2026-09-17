@@ -14,28 +14,33 @@ namespace Pet_Adopt
         public btnRegisterR()
         {
             InitializeComponent();
+            //Hide password
+            txtNewPassword.PasswordChar = '*';
+            txtConfirmP.PasswordChar = '*';
         }
 
         private void btbRegister_Click(object sender, EventArgs e)
         {
             //declaring variables
             string usernameR = txtUserNameR.Text, passwordR = txtNewPassword.Text, confirmP = txtConfirmP.Text, email = txtEmail.Text, phoneNumber = txtPhoneNumber.Text;
-
-            //connection
+            //connection with the stream 
             StreamWriter writer = new StreamWriter("C:\\Users\\sakid\\source\\repos\\Pet-Adopt\\Pet-Adopt\\registration.txt");
-            //string to character array
+            //string to char array
             char[] phoneArray = new char[10];
             phoneArray = phoneNumber.ToCharArray();
 
             using (writer)
             {
                 //Username
-                writer.WriteLine(usernameR);
                 if (string.IsNullOrEmpty(usernameR))
                 {
                     MessageBox.Show("Please enter a username!", "Error");
                     txtUserNameR.Focus();
                     return;
+                }
+                else
+                {
+                    writer.WriteLine(usernameR);
                 }
 
                 //Password
@@ -59,12 +64,15 @@ namespace Pet_Adopt
                 }
 
                 //Email
-                writer.WriteLine(email);
                 if (string.IsNullOrEmpty(email))
                 {
                     MessageBox.Show("Please enter an email!", "Error");
                     txtEmail.Focus();
                     return;
+                }
+                else
+                {
+                    writer.WriteLine(email);
                 }
 
                 //Phone Number
@@ -73,9 +81,21 @@ namespace Pet_Adopt
                     writer.WriteLine(phoneNumber);
                 }
 
-                else
+                else if (phoneArray[0] != '0')
                 {
-                    MessageBox.Show("Invalid phone number!", "Error");
+                    MessageBox.Show("Phone number must start with 0!", "Error");
+                    txtPhoneNumber.Focus();
+                    return;
+                }
+                else if (phoneArray.Length != 10)
+                {
+                    MessageBox.Show("Phone number must be 10 digits long!", "Error");
+                    txtPhoneNumber.Focus();
+                    return;
+                }
+                else if (!phoneArray.All(char.IsDigit))
+                {
+                    MessageBox.Show("Phone number must contain only digits!", "Error");
                     txtPhoneNumber.Focus();
                     return;
                 }
@@ -96,12 +116,18 @@ namespace Pet_Adopt
                     return;
                 }
 
+                //Message 
                 MessageBox.Show("Registration successful", "Success");
 
                 Login login = new Login();
                 login.Show();
                 this.Hide();
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

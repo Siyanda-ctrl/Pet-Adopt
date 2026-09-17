@@ -38,7 +38,6 @@
             label3 = new Label();
             btnRegister = new Button();
             btnAdmin = new Button();
-            listBox1 = new ListBox();
             SuspendLayout();
             // 
             // label1
@@ -54,6 +53,7 @@
             // 
             txtPassword.Location = new Point(229, 156);
             txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(265, 29);
             txtPassword.TabIndex = 1;
             // 
@@ -71,7 +71,8 @@
             txtUserName.Location = new Point(229, 79);
             txtUserName.Name = "txtUserName";
             txtUserName.Size = new Size(265, 29);
-            txtUserName.TabIndex = 3;
+            txtUserName.TabIndex = 0;
+            txtUserName.TextChanged += txtUserName_TextChanged;
             // 
             // btnLogin
             // 
@@ -120,21 +121,13 @@
             btnAdmin.TabIndex = 8;
             btnAdmin.Text = "Admin";
             btnAdmin.UseVisualStyleBackColor = true;
-            // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(525, 262);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(120, 88);
-            listBox1.TabIndex = 9;
+            btnAdmin.Click += btnAdmin_Click;
             // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(10F, 21F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(764, 532);
-            Controls.Add(listBox1);
             Controls.Add(btnAdmin);
             Controls.Add(btnRegister);
             Controls.Add(label3);
@@ -164,6 +157,5 @@
         private Label label3;
         private Button btnRegister;
         private Button btnAdmin;
-        private ListBox listBox1;
     }
 }
